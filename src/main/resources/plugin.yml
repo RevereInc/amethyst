@@ -1,0 +1,7 @@
+main: cc.skymc.amethyst.Main
+description: An advanced gens core.
+version: 1.0
+authors: [ZionRank]
+name: Amethyst
+softdepend: [PlaceholderAPI]
+api-version: 1.19

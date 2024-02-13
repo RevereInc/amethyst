@@ -1,0 +1,20 @@
+STORAGE:
+  MONGO-STORAGE: false
+  MONGO:
+    URI-MODE: true
+    NORMAL:
+      HOST: 127.0.0.1
+      PORT: '27017'
+      DATABASE: Main
+      AUTHENTICATION:
+        ENABLED: false
+        USERNAME: ''
+        PASSWORD: ''
+
+    URI:
+      DATABASE: Main
+      CONNECTION_STRING: mongodb://127.0.0.1:27017/Main
+
+MENUS:
+  ISLAND-TOP:
+    NAME: "&8Island Top"

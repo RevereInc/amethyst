@@ -1,0 +1,40 @@
+GENERATORS:
+  INVENTORY-FULL: "&4&l[!] &cYour inventory is full."
+  GENERATOR-PLACED: "&2&l[!] &aYou have placed a <generator>&a."
+  GENERATOR-BROKEN: "&4&l[!] &cYou have broken a <generator>&c."
+  NOT-OWNED: "&4&l[!] &cYou can only break your own generators."
+
+SERVER:
+  FIRST-JOIN: "&d&lAmethyst &8➼ &7Welcome, &f<player> &7to &fGens &7(#<total>)"
+  SPAWN-TELEPORT: "&2&l[!] &aYou have been teleported to spawn."
+  WARZONE-TELEPORT: "&2&l[!] &aYou have been teleported to the warzone."
+  FARM-TELEPORT: "&2&l[!] &aYou have been teleported to the farm."
+  DUNGEON-TELEPORT: "&2&l[!] &aYou have entered the jungle dimension."
+  DUNGEON-NO-PASS: "&4&l[!] &cYou need a jungle pass to enter the jungle dimension."
+  DUNGEON-EXPIRED: "&4&l[!] &cYour jungle has expired and you have been teleported."
+
+ISLAND:
+  TELEPORT: "&2&l[!] &aYou have teleported to your island."
+  CREATE: "&2&l[!] &aYou have created an island."
+  ALREADY-EXISTS: "&4&l[!] &cYou already have an island."
+  NO-ISLAND: "&4&l[!] &cYou do not have an island."
+  OTHER-NO-ISLAND: "&4&l[!] &cThat player does not have an island."
+  ALREADY-HAS: "&4&l[!] &cThat player already has an island."
+  INVITED: "&2&l[!] &aYou have invited &2<player> &ato your island."
+  OTHER-INVITED: "&2&l[!] &aYou have been invited to &2<player>''s &aisland. &7(/island accept)"
+  JOINED: "&2&l[!] &aYou have joined &2<player>''s &aisland."
+  OTHER-JOINED: "&2&l[!] &2<player> &ahas joined the island."
+  NOT-INVITED: "&4&l[!] &cYou are not invited to that island."
+  CRYSTALS-DEPOSITED: "&2&l[!] &aYou have deposited &2<amount> crystals &ato your island."
+
+PETS:
+  ENABLE: "&2&l[!] &aYou have enabled your <name>&a."
+  DISABLE: "&4&l[!] &cYou have disabled your <name>&c."
+  NOT-ACTIVE: "&4&l[!] &cYou do not have this pet activated."
+
+CRYSTALS:
+  NOT-ENOUGH: "&4&l[!] &cYou do not have enough crystals for that."
+
+TOOL:
+  MINING-RESTRICTED: "&4&l[!] &cYou cannot mine in this area until you reach level <level>"
+

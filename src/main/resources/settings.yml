@@ -1,0 +1,54 @@
+ACTION-BAR:
+  PREFIX: ""
+  SUFFIX: " &3(+<xp> XP)"
+  SYMBOL: "■"
+  REPEAT: 10
+
+TITLES:
+  LEVEL-UP:
+    TITLE: "&a&lLevel <level>"
+    SUBTITLE: "&fYou have levelled up to &aLevel <level>&f."
+  PRESTIGE-NEEDED:
+    TITLE: "&c&lPrestige"
+    SUBTITLE: "&fYou have reached &cLevel 120&f, please &c/prestige&f."
+  PRESTIGED:
+    TITLE: "&2&lPrestige"
+    SUBTITLE: "&fYou have prestiged to &2Prestige <prestige>&f."
+
+LOCATIONS:
+  SPAWN-POINT:
+    X: 0.5
+    Y: 73
+    Z: 0.5
+    PITCH: 90.0
+    YAW: 0.0
+  WARZONE:
+    X: 10000.5
+    Y: 102.5
+    Z: 10000.5
+    PITCH: 0.0
+    YAW: 0.0
+  WHEAT:
+    X: -10000.5
+    Y: 102.5
+    Z: -10000.5
+    PITCH: 90.0
+    YAW: 0.0
+  POTATO:
+    X: -10000.5
+    Y: 102.5
+    Z: 10000.5
+    PITCH: 90.0
+    YAW: 0.0
+  CARROT:
+    X: 10000.5
+    Y: 102.5
+    Z: -10000.5
+    PITCH: 90.0
+    YAW: 0.0
+  DUNGEON:
+    X: 0.5
+    Y: 90
+    Z: 0.5
+    PITCH: 0.0
+    YAW: 0.0
