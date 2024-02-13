@@ -14,6 +14,5 @@
 + [ZionRank](https://github.com/Zahted) | Lead Developer
 
 ## Contact
-- [Discord](https://disc.skymc.cc)
-- [Twitter](https://twitter.com/SkyMC)
-
+- [Discord](https://discord.gg/revere)
+- [LinkedIn](https://www.linkedin.com/company/reveredevelopment/)
