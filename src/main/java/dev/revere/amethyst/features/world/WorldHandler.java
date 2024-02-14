@@ -22,7 +22,7 @@ public class WorldHandler {
     }
 
     public void loadWorlds() {
-        for (String world : core.getConfigYML().getStringList("WORLD.WORLDS")) {
+        for (String world : core.getWorldYML().getStringList("WORLD.WORLDS")) {
             createWorld(world);
         }
     }
