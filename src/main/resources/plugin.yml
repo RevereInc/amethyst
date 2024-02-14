@@ -1,7 +1,7 @@
 main: dev.revere.amethyst.Main
 description: An advanced gens core.
 version: 1.0
-authors: [ZionRank]
+authors: [Revere Development]
 name: Amethyst
 softdepend: [PlaceholderAPI]
 api-version: 1.19

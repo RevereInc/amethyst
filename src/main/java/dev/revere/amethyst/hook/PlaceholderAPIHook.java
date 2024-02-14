@@ -28,7 +28,7 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getAuthor() {
-        return "ZionRank";
+        return "Revere Development";
     }
 
 
