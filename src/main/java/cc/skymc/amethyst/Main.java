@@ -19,6 +19,7 @@ import cc.skymc.amethyst.features.pets.Pet;
 import cc.skymc.amethyst.features.pets.commands.PetCommand;
 import cc.skymc.amethyst.features.pets.PetHandler;
 import cc.skymc.amethyst.features.prestige.PrestigeCommand;
+import cc.skymc.amethyst.features.ui.scoreboard.ScoreboardHandler;
 import cc.skymc.amethyst.features.tool.enchants.EnchantListener;
 import cc.skymc.amethyst.features.tool.listener.ToolListener;
 import cc.skymc.amethyst.hook.ShopGUIPlusHook;
@@ -32,7 +33,6 @@ import cc.skymc.amethyst.hook.PlaceholderAPIHook;
 import cc.skymc.amethyst.profile.ProfileHandler;
 import cc.skymc.amethyst.utils.Safelock;
 import cc.skymc.amethyst.utils.config.BasicConfigurationFile;
-import cc.skymc.amethyst.utils.formatter.MathUtils;
 import co.aikar.commands.PaperCommandManager;
 import io.github.nosequel.menu.MenuHandler;
 import java.util.Arrays;
@@ -42,7 +42,6 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 @Getter
 public class Main extends JavaPlugin {
@@ -63,10 +62,12 @@ public class Main extends JavaPlugin {
     private DungeonHandler dungeonHandler;
 
     private EconomyProvider economyProvider;
+    private ScoreboardHandler scoreboardHandler;
 
     private BasicConfigurationFile messagesYML;
     private BasicConfigurationFile settingsYML;
     private BasicConfigurationFile configYML;
+    private BasicConfigurationFile scoreboardYML;
 
     /**
      * Loading logic of the plugin
@@ -85,6 +86,7 @@ public class Main extends JavaPlugin {
 
         this.messagesYML = new BasicConfigurationFile(this, "messages");
         this.settingsYML = new BasicConfigurationFile(this, "settings");
+        this.scoreboardYML = new BasicConfigurationFile(this, "scoreboard");
     }
 
     /**
@@ -101,6 +103,7 @@ public class Main extends JavaPlugin {
         this.actionBarHandler = new ActionBarHandler(this);
         this.levelHandler = new LevelHandler(this);
         this.dungeonHandler = new DungeonHandler(this);
+        this.scoreboardHandler = new ScoreboardHandler();
 
 
         if (Bukkit.getPluginManager().getPlugin("ShopGuiPlus") != null)
@@ -124,7 +127,6 @@ public class Main extends JavaPlugin {
 
         if (Bukkit.getPluginManager().getPlugin("ShopGuiPlus") != null)
             manager.registerCommand(new AutoSellCommand());
-
 
         Arrays.asList(
             new CrystalsCommand(),
