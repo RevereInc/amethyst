@@ -30,6 +30,7 @@ import cc.skymc.amethyst.features.islands.IslandHandler;
 import cc.skymc.amethyst.features.tool.ToolHandler;
 import cc.skymc.amethyst.hook.PlaceholderAPIHook;
 import cc.skymc.amethyst.profile.ProfileHandler;
+import cc.skymc.amethyst.utils.Safelock;
 import cc.skymc.amethyst.utils.config.BasicConfigurationFile;
 import cc.skymc.amethyst.utils.formatter.MathUtils;
 import co.aikar.commands.PaperCommandManager;
@@ -74,8 +75,14 @@ public class Main extends JavaPlugin {
     @Override
     public void onLoad() {
         instance = this;
-
         this.configYML = new BasicConfigurationFile(this, "config");
+
+        if(!new Safelock(this, configYML.getString("LICENCE"), "https://license.revere.dev/api/client", "3016f575fa8f3c58b9224047695249f3ca4ca773").unlock()) {
+            Bukkit.getPluginManager().disablePlugin(this);
+            Bukkit.getScheduler().cancelTasks(this);
+            return;
+        }
+
         this.messagesYML = new BasicConfigurationFile(this, "messages");
         this.settingsYML = new BasicConfigurationFile(this, "settings");
     }
@@ -95,11 +102,14 @@ public class Main extends JavaPlugin {
         this.levelHandler = new LevelHandler(this);
         this.dungeonHandler = new DungeonHandler(this);
 
-        this.economyProvider = new EconomyProvider(this);
 
-        if(configYML.getBoolean("STORAGE.MONGO-STORAGE")) {
+        if (Bukkit.getPluginManager().getPlugin("ShopGuiPlus") != null)
+            this.economyProvider = new EconomyProvider(this);
+
+
+        if(configYML.getBoolean("STORAGE.MONGO-STORAGE"))
             this.storage = new MongoStorage(this);
-        }
+
 
         islandHandler.loadGrid(this);
 
@@ -111,6 +121,10 @@ public class Main extends JavaPlugin {
         hook();
 
         PaperCommandManager manager = new PaperCommandManager(this);
+
+        if (Bukkit.getPluginManager().getPlugin("ShopGuiPlus") != null)
+            manager.registerCommand(new AutoSellCommand());
+
 
         Arrays.asList(
             new CrystalsCommand(),
@@ -126,7 +140,6 @@ public class Main extends JavaPlugin {
             new DungeonCommand(),
             new PrestigeCommand(),
             new PayCommand(this),
-            new AutoSellCommand(),
             new FlyCommand(),
             new CraftCommand()
         ).forEach(manager::registerCommand);

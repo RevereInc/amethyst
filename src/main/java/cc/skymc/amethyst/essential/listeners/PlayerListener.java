@@ -43,20 +43,17 @@ public class PlayerListener implements Listener {
     event.setJoinMessage(null);
 
     if(toolHandler.getTool(player.getUniqueId()).isEmpty()) {
+      System.out.println("test");
       final Tool tool = toolHandler.createTool(
           player.getUniqueId(),
           ToolRarity.BASIC
       );
 
       player.getInventory().addItem(tool.getHoe());
-    }
-
-    if(!player.hasPlayedBefore()) {
       player.getInventory().addItem(GeneratorType.COBBLESTONE.itemStack());
       Bukkit.getServer().broadcastMessage(Locale.FIRST_JOIN.getColoredString()
-          .replace("<player>", event.getPlayer().getName())
-          .replace("<total>", String.valueOf(Bukkit.getOfflinePlayers().length)));
-
+              .replace("<player>", event.getPlayer().getName())
+              .replace("<total>", String.valueOf(Bukkit.getOfflinePlayers().length)));
     }
   }
 
