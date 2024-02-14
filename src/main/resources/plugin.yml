@@ -1,4 +1,4 @@
-main: cc.skymc.amethyst.Main
+main: dev.revere.amethyst.Main
 description: An advanced gens core.
 version: 1.0
 authors: [ZionRank]
