@@ -27,7 +27,7 @@ public class DungeonCommand extends BaseCommand {
 
     @CommandAlias("enter")
     public void enter(Player sender) {
-        if(!dungeonHandler.checkPass(sender)) {
+        if (!dungeonHandler.checkPass(sender)) {
             sender.sendMessage(Locale.DUNGEON_NO_PASS.getColoredString());
             return;
         }
@@ -48,5 +48,4 @@ public class DungeonCommand extends BaseCommand {
     public void givePass(Player sender, OnlinePlayer player) {
         Main.getInstance().getDungeonHandler().getRemaining(player.getPlayer().getUniqueId());
     }
-
 }

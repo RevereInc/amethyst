@@ -12,25 +12,25 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface Storage {
-  Optional<Profile> loadProfile(UUID uuid);
-  Optional<Generator> loadGenerator(UUID uuid);
-  Optional<Tool> loadTool(UUID uuid);
-  Optional<Island> loadIsland(UUID uuid);
-  Optional<Grid> loadGrid();
+    Optional<Profile> loadProfile(UUID uuid);
+    Optional<Generator> loadGenerator(UUID uuid);
+    Optional<Tool> loadTool(UUID uuid);
+    Optional<Island> loadIsland(UUID uuid);
+    Optional<Grid> loadGrid();
 
-  List<Enchant> loadEnchants(UUID uuid);
+    List<Enchant> loadEnchants(UUID uuid);
 
-  void saveProfile(Profile profile);
-  void saveGenerator(Generator generator);
-  void saveTool(Tool tool);
-  void saveIsland(Island island);
-  void saveGrid(Grid grid);
-  void saveEnchant(Tool tool, Enchant enchant);
+    void saveProfile(Profile profile);
+    void saveGenerator(Generator generator);
+    void saveTool(Tool tool);
+    void saveIsland(Island island);
+    void saveGrid(Grid grid);
+    void saveEnchant(Tool tool, Enchant enchant);
 
-  void removeProfile(Profile profile);
-  void removeGenerator(Generator generator);
-  void removeTool(Tool tool);
-  void removeIsland(Island island);
-  void removeEnchant(Tool tool, Enchant enchant);
-  void removeEnchants(Tool tool);
+    void removeProfile(Profile profile);
+    void removeGenerator(Generator generator);
+    void removeTool(Tool tool);
+    void removeIsland(Island island);
+    void removeEnchant(Tool tool, Enchant enchant);
+    void removeEnchants(Tool tool);
 }

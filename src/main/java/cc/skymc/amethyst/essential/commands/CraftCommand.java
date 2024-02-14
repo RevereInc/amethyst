@@ -9,9 +9,9 @@ import org.bukkit.entity.Player;
 @CommandAlias("craft")
 public class CraftCommand extends BaseCommand {
 
-  @Default
-  @CommandPermission("amethyst.craft")
-  public void craft(Player sender) {
-    sender.openWorkbench(sender.getLocation(), false);
-  }
+    @Default
+    @CommandPermission("amethyst.craft")
+    public void craft(Player sender) {
+        sender.openWorkbench(sender.getLocation(), false);
+    }
 }

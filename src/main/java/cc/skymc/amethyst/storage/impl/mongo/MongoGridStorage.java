@@ -17,7 +17,7 @@ public class MongoGridStorage {
 
     public Optional<Grid> load() {
         final Document document = mongoHandler.getGrid().find().first();
-        if(document == null)
+        if (document == null)
             return Optional.empty();
 
         return Optional.of(new Grid(
@@ -60,7 +60,7 @@ public class MongoGridStorage {
         document.put("fz2", grid.getFillingRegion().region.z2);
         document.put("fd", grid.getFillingRegion().direction.name());
 
-        if(prev != null)
+        if (prev != null)
             mongoHandler.getGrid().drop();
 
         mongoHandler.getGrid().insertOne(document);

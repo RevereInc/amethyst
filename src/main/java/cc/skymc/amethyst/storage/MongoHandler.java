@@ -91,10 +91,10 @@ public class MongoHandler {
     }
 
     public void disableLogging() {
-        Logger mongoLogger = Logger.getLogger( "com.mongodb" );
+        Logger mongoLogger = Logger.getLogger("com.mongodb");
         mongoLogger.setLevel(Level.SEVERE);
 
-        Logger legacyLogger = Logger.getLogger( "org.mongodb" );
+        Logger legacyLogger = Logger.getLogger("org.mongodb");
         legacyLogger.setLevel(Level.SEVERE);
     }
 }

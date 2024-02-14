@@ -3,9 +3,11 @@ package cc.skymc.amethyst.profile;
 import cc.skymc.amethyst.Main;
 import cc.skymc.amethyst.features.generators.Generator;
 import cc.skymc.amethyst.features.islands.Island;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.Document;
@@ -57,7 +59,7 @@ public class Profile {
         document.append("autoSell", autoSell);
 
         List<UUID> generatorIDs = new ArrayList<>();
-        for(Generator generator : generators) {
+        for (Generator generator : generators) {
             generatorIDs.add(generator.getUuid());
         }
 
@@ -68,7 +70,7 @@ public class Profile {
     }
 
     public Optional<Island> getIsland() {
-        if(island == null)
+        if (island == null)
             return Optional.empty();
 
         return Main.getInstance().getIslandHandler().getIsland(island);

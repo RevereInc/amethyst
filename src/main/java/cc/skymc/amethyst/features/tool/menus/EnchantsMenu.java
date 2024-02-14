@@ -42,7 +42,8 @@ public class EnchantsMenu extends Menu {
                     event.setCancelled(true);
                     toolHandler.purchaseEnchant(getPlayer(), tool, new SpeedEnchant(1));
                     getPlayer().setItemInHand(tool.getUpdatedItem(getPlayer().getItemInHand().getType()));
-                }); slot += 1;
+                });
+        slot += 1;
 
         this.buttons[slot] = new Button(SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTAwZDc1YThjYzAzZTU5YzQ3NWNhYzc2ODFiYjRlNmQwOGFjNTkyOTBkNWYyMzlkNjA1Njc2MmI0ZTU1ZjkxNSJ9fX0="))
                 .setDisplayName("&a&lʜᴀsᴛᴇ")
@@ -51,7 +52,8 @@ public class EnchantsMenu extends Menu {
                     event.setCancelled(true);
                     toolHandler.purchaseEnchant(getPlayer(), tool, new HasteEnchant(1));
                     getPlayer().setItemInHand(tool.getUpdatedItem(getPlayer().getItemInHand().getType()));
-                }); slot += 1;
+                });
+        slot += 1;
 
         this.buttons[slot] = new Button(SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTEzODM1MmY0NzQ1ZTAyYzA5MzkxNDZkYmQzNjZlNjUzNWE3ZjRlZjM5NjUzMDA5YjVjMzljMjRiOTRkNGNhNyJ9fX0="))
                 .setDisplayName("&a&lʟᴇᴠᴇʟ ꜰɪɴᴅᴇʀ")
@@ -60,7 +62,8 @@ public class EnchantsMenu extends Menu {
                     event.setCancelled(true);
                     toolHandler.purchaseEnchant(getPlayer(), tool, new LevelFinderEnchant(1));
                     getPlayer().setItemInHand(tool.getUpdatedItem(getPlayer().getItemInHand().getType()));
-                }); slot += 1;
+                });
+        slot += 1;
 
         this.buttons[slot] = new Button(SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI4MDMyOWRjMDNhZTU0MWE3YjNmYjdlMWNmZTYzYThkZDg1ZjNlY2I5N2YzNTNiMDkyYWQ2YzBlMGZiMWM5NSJ9fX0="))
                 .setDisplayName("&a&lᴘᴏɪɴᴛ ꜰɪɴᴅᴇʀ")
@@ -69,7 +72,8 @@ public class EnchantsMenu extends Menu {
                     event.setCancelled(true);
                     toolHandler.purchaseEnchant(getPlayer(), tool, new OrbsBoosterEnchant(1));
                     getPlayer().setItemInHand(tool.getUpdatedItem(getPlayer().getItemInHand().getType()));
-                }); slot += 1;
+                });
+        slot += 1;
 
         this.buttons[slot] = new Button(SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI1OGY2Njk4MGY1ODhhN2M2ODVlYmI2NWQyOTMyNTE3NDk0ZDgzN2ExZjkyNzY1MGVmYmEzNTQ0NzUwYTI5MSJ9fX0="))
                 .setDisplayName("&a&lᴏʀʙs ʙᴏᴏsᴛᴇʀ")
@@ -78,8 +82,8 @@ public class EnchantsMenu extends Menu {
                     event.setCancelled(true);
                     toolHandler.purchaseEnchant(getPlayer(), tool, new CrystalFinderEnchant(1));
                     getPlayer().setItemInHand(tool.getUpdatedItem(getPlayer().getItemInHand().getType()));
-                }); slot += 1;
-
+                });
+        slot += 1;
 
 
         this.buttons[slot] = new Button(SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzQ4YTdlYTE5OGVjNGVmZDhiNTZiY2RhOGFhNDIzMDAzOWUwNGQxMzM4ZWU5OGZhODU4OTdiZDRmMzQyZDYzMiJ9fX0="))
@@ -89,7 +93,8 @@ public class EnchantsMenu extends Menu {
                     event.setCancelled(true);
                     toolHandler.purchaseEnchant(getPlayer(), tool, new XPBoostEnchant(1));
                     getPlayer().setItemInHand(tool.getUpdatedItem(getPlayer().getItemInHand().getType()));
-                }); slot += 1;
+                });
+        slot += 1;
 
         this.buttons[slot] = new Button(SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzNhYzdhZWE0MDJjZTYyOWE0ODMzYTQ1MjI4ZGY0NWE1MDYyZDExMmYwZjgyNmMzYzM0M2NmMDY4MDkxY2JlYSJ9fX0="))
                 .setDisplayName("&a&lᴋᴇʏ ꜰɪɴᴅᴇʀ")
@@ -98,6 +103,7 @@ public class EnchantsMenu extends Menu {
                     event.setCancelled(true);
                     toolHandler.purchaseEnchant(getPlayer(), tool, new KeyFinderEnchant(1));
                     getPlayer().setItemInHand(tool.getUpdatedItem(getPlayer().getItemInHand().getType()));
-                }); slot += 1;
+                });
+        slot += 1;
     }
 }

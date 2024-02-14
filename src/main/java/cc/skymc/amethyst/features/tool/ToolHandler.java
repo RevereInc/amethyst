@@ -17,86 +17,86 @@ import org.bukkit.entity.Player;
 @Getter
 public class ToolHandler {
 
-  private final Main core;
-  private final Map<UUID, Tool> tools = new HashMap<>();
+    private final Main core;
+    private final Map<UUID, Tool> tools = new HashMap<>();
 
-  public ToolHandler(Main core) {
-    this.core = core;
-  }
+    public ToolHandler(Main core) {
+        this.core = core;
+    }
 
-  public final Tool createTool(UUID uuid, ToolRarity rarity) {
-    final Tool tool = new Tool(uuid, rarity, Arrays.asList(new OrbsBoosterEnchant(3)));
+    public final Tool createTool(UUID uuid, ToolRarity rarity) {
+        final Tool tool = new Tool(uuid, rarity, Arrays.asList(new OrbsBoosterEnchant(3)));
 
-    core.getStorage().saveTool(tool);
-    tools.put(uuid, tool);
+        core.getStorage().saveTool(tool);
+        tools.put(uuid, tool);
 
-    return tool;
-  }
+        return tool;
+    }
 
-  public final void remove(Tool tool) {
-    core.getStorage().removeTool(tool);
-    tools.remove(tool.getUuid());
-  }
+    public final void remove(Tool tool) {
+        core.getStorage().removeTool(tool);
+        tools.remove(tool.getUuid());
+    }
 
-  public final Optional<Tool> getTool(UUID uuid) {
-    if(tools.containsKey(uuid))
-      return Optional.of(tools.get(uuid));
+    public final Optional<Tool> getTool(UUID uuid) {
+        if (tools.containsKey(uuid))
+            return Optional.of(tools.get(uuid));
 
-    Optional<Tool> tool = core.getStorage().loadTool(uuid);
-    if(tool.isPresent())
-      tools.put(uuid, tool.get());
+        Optional<Tool> tool = core.getStorage().loadTool(uuid);
+        if (tool.isPresent())
+            tools.put(uuid, tool.get());
 
-    return tool;
-  }
+        return tool;
+    }
 
-  public void purchaseEnchant(Player player, Tool tool, Enchant enchant) {
-    List<Enchant> currentEnchants = new ArrayList<>(tool.getEnchants());
+    public void purchaseEnchant(Player player, Tool tool, Enchant enchant) {
+        List<Enchant> currentEnchants = new ArrayList<>(tool.getEnchants());
 
-    // Extract enchant names from currentEnchants
-    List<String> enchantNames = new ArrayList<>();
-    currentEnchants.forEach(loopEnchant -> enchantNames.add(loopEnchant.name()));
+        // Extract enchant names from currentEnchants
+        List<String> enchantNames = new ArrayList<>();
+        currentEnchants.forEach(loopEnchant -> enchantNames.add(loopEnchant.name()));
 
-    // Check if the enchant name is already in the list
-    boolean enchantExists = enchantNames.contains(enchant.name());
+        // Check if the enchant name is already in the list
+        boolean enchantExists = enchantNames.contains(enchant.name());
 
-    if (enchantExists) {
-      // Enchantment exists, find it and increment the level
-      for (Enchant currentEnchant : currentEnchants) {
-        if (currentEnchant.name().equals(enchant.name())) {
-          int newLevel = currentEnchant.level() + 1;
+        if (enchantExists) {
+            // Enchantment exists, find it and increment the level
+            for (Enchant currentEnchant : currentEnchants) {
+                if (currentEnchant.name().equals(enchant.name())) {
+                    int newLevel = currentEnchant.level() + 1;
 
-          if(newLevel > currentEnchant.maxLevel()) {
-            player.sendMessage(Style.translate("&4&l[!] &cYou have reached the max level of that enchant."));
-            return;
-          }
+                    if (newLevel > currentEnchant.maxLevel()) {
+                        player.sendMessage(Style.translate("&4&l[!] &cYou have reached the max level of that enchant."));
+                        return;
+                    }
 
-          if(deductOrbsAmount(player, enchant.price()))
-            currentEnchant.setLevel(newLevel);
-          break; // No need to continue iterating once found
+                    if (deductOrbsAmount(player, enchant.price()))
+                        currentEnchant.setLevel(newLevel);
+                    break; // No need to continue iterating once found
+                }
+            }
+        } else {
+            // Enchantment does not exist, add it to the tool
+            if (deductOrbsAmount(player, enchant.price()))
+                currentEnchants.add(enchant);
+
         }
-      }
-    } else {
-      // Enchantment does not exist, add it to the tool
-      if(deductOrbsAmount(player, enchant.price()))
-        currentEnchants.add(enchant);
 
+        tool.setEnchants(currentEnchants);
     }
 
-    tool.setEnchants(currentEnchants);
-  }
+    public boolean deductOrbsAmount(Player player, long amount) {
+        Profile profile = Main.getInstance().getProfileHandler().getProfile(player.getUniqueId());
 
-  public boolean deductOrbsAmount(Player player, long amount) {
-    Profile profile = Main.getInstance().getProfileHandler().getProfile(player.getUniqueId());
+        if (profile.getOrbs() < amount) {
+            player.sendMessage(Style.translate("&4&l[!] &cYou do not have enough orbs to purchase that."));
+            return false;
+        }
 
-    if(profile.getOrbs() < amount) {
-      player.sendMessage(Style.translate("&4&l[!] &cYou do not have enough orbs to purchase that."));
-      return false;
+        profile.setOrbs(profile.getOrbs() - amount);
+        player.sendMessage(Style.translate("&2&l[!] &aYou have successfully purchased a level."));
+        return true;
     }
-
-    profile.setOrbs(profile.getOrbs() - amount);
-    player.sendMessage(Style.translate("&2&l[!] &aYou have successfully purchased a level."));
-    return true;
-  }
 
 
 }

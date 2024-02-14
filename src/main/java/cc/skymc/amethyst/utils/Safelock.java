@@ -19,15 +19,6 @@ import java.util.Base64;
 import java.util.Enumeration;
 import java.util.Scanner;
 
-
-/*
-        if(!new Safelock(this, "GET_LICENSE_FROM_CONFIG_HERE", "http://IP_ADDRESS/api/client", "API_KEY").verify()) {
-            Bukkit.getPluginManager().disablePlugin(this);
-            Bukkit.getScheduler().cancelTasks(this);
-            return;
-        }
-*/
-
 public class Safelock {
     private Plugin plugin;
     private String productKey;

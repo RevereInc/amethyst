@@ -22,7 +22,7 @@ public class ScoreboardHandler implements Listener {
         Main.getInstance().getServer().getPluginManager().registerEvents(this, Main.getInstance());
 
         Main.getInstance().getServer().getScheduler().runTaskTimerAsynchronously(Main.getInstance(), () -> {
-            for(FastBoard board : boards.values()) {
+            for (FastBoard board : boards.values()) {
                 updateBoard(board);
             }
         }, 0, 20L);
@@ -41,7 +41,7 @@ public class ScoreboardHandler implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         FastBoard board = this.boards.remove(event.getPlayer().getUniqueId());
 
-        if(board == null)
+        if (board == null)
             return;
 
         board.delete();

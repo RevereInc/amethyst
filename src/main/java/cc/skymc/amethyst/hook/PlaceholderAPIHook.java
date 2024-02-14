@@ -9,6 +9,7 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 
 import java.util.Optional;
+
 import org.jetbrains.annotations.NotNull;
 
 public class PlaceholderAPIHook extends PlaceholderExpansion {
@@ -19,12 +20,14 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
         this.core = core;
     }
 
-    @Override public @NotNull String getIdentifier() {
+    @Override
+    public @NotNull String getIdentifier() {
         return "amethyst";
     }
 
 
-    @Override public @NotNull String getAuthor() {
+    @Override
+    public @NotNull String getAuthor() {
         return "ZionRank";
     }
 
@@ -35,13 +38,15 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
     }
 
     @Override
-    public boolean canRegister() { return true; }
+    public boolean canRegister() {
+        return true;
+    }
 
     @Override
     public String onPlaceholderRequest(Player player, String params) {
         final Profile profile = core.getProfileHandler().getProfile(player.getUniqueId());
 
-        switch(params) {
+        switch (params) {
             case "level":
                 return String.valueOf(profile.getLevel());
             case "balance":
@@ -61,7 +66,7 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
             case "prestige":
                 return String.valueOf(profile.getPrestige());
             case "prestige_formatted":
-                if(profile.getPrestige() < 1)
+                if (profile.getPrestige() < 1)
                     return "";
                 else
                     return Style.translate("&7(" + profile.getPrestige() + ")");

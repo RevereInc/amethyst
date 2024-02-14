@@ -6,12 +6,11 @@ import cc.skymc.amethyst.profile.ProfileHandler;
 
 public class IslandListener {
 
-  private final IslandHandler islandHandler;
-  private final ProfileHandler profileHandler;
+    private final IslandHandler islandHandler;
+    private final ProfileHandler profileHandler;
 
-  public IslandListener(Main core) {
-    this.islandHandler = core.getIslandHandler();
-    this.profileHandler = core.getProfileHandler();
-  }
-
+    public IslandListener(Main core) {
+        this.islandHandler = core.getIslandHandler();
+        this.profileHandler = core.getProfileHandler();
+    }
 }

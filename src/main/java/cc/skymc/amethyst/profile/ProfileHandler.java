@@ -1,7 +1,9 @@
 package cc.skymc.amethyst.profile;
 
 import cc.skymc.amethyst.Main;
+
 import java.util.Optional;
+
 import lombok.Getter;
 
 import java.util.HashMap;
@@ -43,11 +45,11 @@ public class ProfileHandler {
     }
 
     public final Profile getProfile(UUID uuid) {
-        if(profiles.containsKey(uuid))
-           return profiles.get(uuid);
+        if (profiles.containsKey(uuid))
+            return profiles.get(uuid);
 
         Optional<Profile> profile = core.getStorage().loadProfile(uuid);
-        if(profile.isPresent()) {
+        if (profile.isPresent()) {
             profiles.put(uuid, profile.get());
             return profile.get();
         }

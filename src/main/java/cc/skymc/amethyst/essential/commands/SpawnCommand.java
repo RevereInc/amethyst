@@ -15,20 +15,20 @@ import org.bukkit.entity.Player;
 @RequiredArgsConstructor
 public class SpawnCommand extends BaseCommand {
 
-  @Default
-  public void spawn(Player sender) {
-    ConfigurationSection section = Main.getInstance().getSettingsYML().getConfig().getConfigurationSection("LOCATIONS.SPAWN-POINT");
+    @Default
+    public void spawn(Player sender) {
+        ConfigurationSection section = Main.getInstance().getSettingsYML().getConfig().getConfigurationSection("LOCATIONS.SPAWN-POINT");
 
-    Location location = new Location(
-        Bukkit.getServer().getWorld("world"),
-        section.getDouble("X"),
-        section.getDouble("Y"),
-        section.getDouble("Z"),
-        Integer.valueOf(section.getInt("PITCH")).floatValue(),
-        Integer.valueOf(section.getInt("YAW")).floatValue());
+        Location location = new Location(
+                Bukkit.getServer().getWorld("world"),
+                section.getDouble("X"),
+                section.getDouble("Y"),
+                section.getDouble("Z"),
+                Integer.valueOf(section.getInt("PITCH")).floatValue(),
+                Integer.valueOf(section.getInt("YAW")).floatValue());
 
-    sender.teleportAsync(location);
-    sender.sendMessage(Locale.SPAWN_TELEPORT.getColoredString());
-  }
+        sender.teleportAsync(location);
+        sender.sendMessage(Locale.SPAWN_TELEPORT.getColoredString());
+    }
 
 }

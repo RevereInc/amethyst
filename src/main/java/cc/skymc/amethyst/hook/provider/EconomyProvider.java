@@ -7,37 +7,37 @@ import org.bukkit.entity.Player;
 
 public class EconomyProvider extends net.brcdev.shopgui.provider.economy.EconomyProvider {
 
-  private final ProfileHandler profileHandler;
+    private final ProfileHandler profileHandler;
 
-  public EconomyProvider(Main core) {
-    this.profileHandler = core.getProfileHandler();
+    public EconomyProvider(Main core) {
+        this.profileHandler = core.getProfileHandler();
 
-    this.currencyPrefix = "$";
-    this.currencySuffix = "";
-  }
+        this.currencyPrefix = "$";
+        this.currencySuffix = "";
+    }
 
-  @Override
-  public String getName() {
-    return "Amethyst";
-  }
+    @Override
+    public String getName() {
+        return "Amethyst";
+    }
 
-  @Override
-  public double getBalance(Player player) {
-    return profileHandler.getProfile(player.getUniqueId()).getBalance();
-  }
+    @Override
+    public double getBalance(Player player) {
+        return profileHandler.getProfile(player.getUniqueId()).getBalance();
+    }
 
-  @Override
-  public void deposit(Player player, double v) {
-    Profile profile = profileHandler.getProfile(player.getUniqueId());
-    profile.setBalance(profile.getBalance() + Math.round(v));
-  }
+    @Override
+    public void deposit(Player player, double v) {
+        Profile profile = profileHandler.getProfile(player.getUniqueId());
+        profile.setBalance(profile.getBalance() + Math.round(v));
+    }
 
-  @Override
-  public void withdraw(Player player, double v) {
-    Profile profile = profileHandler.getProfile(player.getUniqueId());
-    if(profile.getBalance() < v)
-      return;
+    @Override
+    public void withdraw(Player player, double v) {
+        Profile profile = profileHandler.getProfile(player.getUniqueId());
+        if (profile.getBalance() < v)
+            return;
 
-    profile.setBalance(profile.getBalance() - Math.round(v));
-  }
+        profile.setBalance(profile.getBalance() - Math.round(v));
+    }
 }

@@ -22,6 +22,7 @@ import cc.skymc.amethyst.features.prestige.PrestigeCommand;
 import cc.skymc.amethyst.features.ui.scoreboard.ScoreboardHandler;
 import cc.skymc.amethyst.features.tool.enchants.EnchantListener;
 import cc.skymc.amethyst.features.tool.listener.ToolListener;
+import cc.skymc.amethyst.features.world.WorldHandler;
 import cc.skymc.amethyst.hook.ShopGUIPlusHook;
 import cc.skymc.amethyst.hook.provider.EconomyProvider;
 import cc.skymc.amethyst.profile.Profile;
@@ -35,11 +36,14 @@ import cc.skymc.amethyst.utils.Safelock;
 import cc.skymc.amethyst.utils.config.BasicConfigurationFile;
 import co.aikar.commands.PaperCommandManager;
 import io.github.nosequel.menu.MenuHandler;
+
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
+
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.WorldCreator;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -60,6 +64,7 @@ public class Main extends JavaPlugin {
     private ActionBarHandler actionBarHandler;
     private LevelHandler levelHandler;
     private DungeonHandler dungeonHandler;
+    private WorldHandler worldHandler;
 
     private EconomyProvider economyProvider;
     private ScoreboardHandler scoreboardHandler;
@@ -68,17 +73,17 @@ public class Main extends JavaPlugin {
     private BasicConfigurationFile settingsYML;
     private BasicConfigurationFile configYML;
     private BasicConfigurationFile scoreboardYML;
+    private BasicConfigurationFile worldYML;
 
     /**
      * Loading logic of the plugin
      */
-
     @Override
     public void onLoad() {
         instance = this;
         this.configYML = new BasicConfigurationFile(this, "config");
 
-        if(!new Safelock(this, configYML.getString("LICENCE"), "https://license.revere.dev/api/client", "3016f575fa8f3c58b9224047695249f3ca4ca773").unlock()) {
+        if (!new Safelock(this, configYML.getString("LICENCE"), "https://license.revere.dev/api/client", "3016f575fa8f3c58b9224047695249f3ca4ca773").unlock()) {
             Bukkit.getPluginManager().disablePlugin(this);
             Bukkit.getScheduler().cancelTasks(this);
             return;
@@ -87,32 +92,23 @@ public class Main extends JavaPlugin {
         this.messagesYML = new BasicConfigurationFile(this, "messages");
         this.settingsYML = new BasicConfigurationFile(this, "settings");
         this.scoreboardYML = new BasicConfigurationFile(this, "scoreboard");
+        this.worldYML = new BasicConfigurationFile(this, "worlds");
     }
 
     /**
      * Enabling logic of the plugin
      */
-
     @Override
     public void onEnable() {
-        this.profileHandler = new ProfileHandler(this);
-        this.islandHandler = new IslandHandler(this);
-        this.generatorHandler = new GeneratorHandler(this);
-        this.toolHandler = new ToolHandler(this);
-        this.petHandler = new PetHandler(this);
-        this.actionBarHandler = new ActionBarHandler(this);
-        this.levelHandler = new LevelHandler(this);
-        this.dungeonHandler = new DungeonHandler(this);
-        this.scoreboardHandler = new ScoreboardHandler();
+        loadHandlers();
 
-
-        if (Bukkit.getPluginManager().getPlugin("ShopGuiPlus") != null)
+        if (Bukkit.getPluginManager().getPlugin("ShopGuiPlus") != null) {
             this.economyProvider = new EconomyProvider(this);
+        }
 
-
-        if(configYML.getBoolean("STORAGE.MONGO-STORAGE"))
+        if (configYML.getBoolean("STORAGE.MONGO-STORAGE")) {
             this.storage = new MongoStorage(this);
-
+        }
 
         islandHandler.loadGrid(this);
 
@@ -122,43 +118,59 @@ public class Main extends JavaPlugin {
         }
 
         hook();
+        loadCommands();
+        loadListeners();
+    }
 
-        PaperCommandManager manager = new PaperCommandManager(this);
-
-        if (Bukkit.getPluginManager().getPlugin("ShopGuiPlus") != null)
-            manager.registerCommand(new AutoSellCommand());
-
-        Arrays.asList(
-            new CrystalsCommand(),
-            new EconomyCommand(),
-            new BalanceCommand(),
-            new OrbsCommand(),
-            new SpawnCommand(),
-            new IslandCommand(),
-            new GeneratorCommand(),
-            new LevelCommand(),
-            new PetCommand(),
-            new WarpCommand(this),
-            new DungeonCommand(),
-            new PrestigeCommand(),
-            new PayCommand(this),
-            new FlyCommand(),
-            new CraftCommand()
-        ).forEach(manager::registerCommand);
-
-
+    private void loadHandlers() {
+        this.profileHandler = new ProfileHandler(this);
+        this.islandHandler = new IslandHandler(this);
+        this.generatorHandler = new GeneratorHandler(this);
+        this.toolHandler = new ToolHandler(this);
+        this.petHandler = new PetHandler(this);
+        this.actionBarHandler = new ActionBarHandler(this);
+        this.levelHandler = new LevelHandler(this);
+        this.dungeonHandler = new DungeonHandler(this);
+        this.scoreboardHandler = new ScoreboardHandler();
+        this.worldHandler = new WorldHandler(this);
         new MenuHandler(this);
+    }
 
+    private void loadListeners() {
         Arrays.asList(
-            new PlayerListener(this),
-            new EnchantListener(this),
-            new ToolListener(this)
+                new PlayerListener(this),
+                new EnchantListener(this),
+                new ToolListener(this)
         ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
     }
 
+    private void loadCommands() {
+        PaperCommandManager manager = new PaperCommandManager(this);
+
+        if (Bukkit.getPluginManager().getPlugin("ShopGuiPlus") != null) {
+            manager.registerCommand(new AutoSellCommand());
+        }
+        Arrays.asList(
+                new CrystalsCommand(),
+                new EconomyCommand(),
+                new BalanceCommand(),
+                new OrbsCommand(),
+                new SpawnCommand(),
+                new IslandCommand(),
+                new GeneratorCommand(),
+                new LevelCommand(),
+                new PetCommand(),
+                new WarpCommand(this),
+                new DungeonCommand(),
+                new PrestigeCommand(),
+                new PayCommand(this),
+                new FlyCommand(),
+                new CraftCommand()
+        ).forEach(manager::registerCommand);
+    }
 
     public void hook() {
-        if(Bukkit.getPluginManager().getPlugin("ShopGUIPlus") == null) {
+        if (Bukkit.getPluginManager().getPlugin("ShopGUIPlus") == null) {
             Bukkit.getConsoleSender().sendMessage("ShopGuiPlus was not found.");
             return;
         }
@@ -181,13 +193,13 @@ public class Main extends JavaPlugin {
         islandHandler.getIslands().values().forEach(island -> storage.saveIsland(island));
         storage.saveGrid(islandHandler.getGrid());
 
-        for(Player player : Bukkit.getOnlinePlayers()) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
             UUID uuid = player.getUniqueId();
 
             Optional<Pet> pet = PetHandler.getPet(uuid);
             Profile profile = profileHandler.getProfile(uuid);
 
-            if(pet.isEmpty())
+            if (pet.isEmpty())
                 continue;
 
             PetHandler.getActiveStands().get(uuid).remove();

@@ -6,20 +6,27 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
 
 public interface Enchant {
 
-  String name();
-  String style();
-  Material material();
-  double chance();
-  long price();
-  int level();
+    String name();
 
-  int maxLevel();
+    String style();
 
-  void setLevel(int level); // New method to set the level
+    Material material();
 
-  default void onBreak(BlockBreakEvent event) {
+    double chance();
 
-  }
-  default void onHold(PlayerItemHeldEvent event, boolean holding) {}
+    long price();
+
+    int level();
+
+    int maxLevel();
+
+    void setLevel(int level); // New method to set the level
+
+    default void onBreak(BlockBreakEvent event) {
+
+    }
+
+    default void onHold(PlayerItemHeldEvent event, boolean holding) {
+    }
 
 }
