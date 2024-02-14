@@ -33,9 +33,7 @@ public class WorldHandler {
         }
 
         final WorldCreator creator = new WorldCreator(name);
-        creator.type(WorldType.FLAT);
-        creator.generatorSettings("3;minecraft;air;");
-        creator.generateStructures(false);
+        creator.generator(new EmptyChunkGenerator());
 
         World world = core.getServer().createWorld(creator);
         worlds.put(name, world);
