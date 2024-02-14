@@ -32,7 +32,7 @@ public class Tool {
     List<String> lores = new ArrayList<>();
 
     lores.add("");
-    lores.add(rarity.color + "▎ &fRarity: " + PlaceholderAPI.setPlaceholders(null, "%img_" + rarity.icon + "%"));
+    lores.add(rarity.color + "▎ &fRarity: " + rarity.color + ChatColor.BOLD + rarity.name);
 
     if(!this.enchants.isEmpty()) {
       lores.add("");
