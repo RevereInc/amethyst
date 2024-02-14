@@ -133,6 +133,7 @@ public class Main extends JavaPlugin {
         this.dungeonHandler = new DungeonHandler(this);
         this.scoreboardHandler = new ScoreboardHandler();
         this.worldHandler = new WorldHandler(this);
+
         new MenuHandler(this);
     }
 
