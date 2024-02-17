@@ -7,10 +7,17 @@ import dev.revere.amethyst.features.generators.listener.GeneratorScheduler;
 
 import java.util.*;
 
+import dev.revere.amethyst.utils.chat.Style;
 import lombok.Getter;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.holoeasy.HoloEasy;
+import org.holoeasy.builder.HologramBuilder;
+import org.holoeasy.config.HologramKey;
+import org.holoeasy.pool.IHologramPool;
 
 @Getter
 public class GeneratorHandler {
@@ -18,10 +25,11 @@ public class GeneratorHandler {
     private final Main core;
     private final Map<UUID, Generator> generators = new HashMap<>();
     private final List<Location> generatorLocations;
-
+    private final IHologramPool hologramPool;
     public GeneratorHandler(Main core) {
         this.core = core;
         this.generatorLocations = loadGeneratorLocations();
+        this.hologramPool = HoloEasy.startInteractivePool(core, 60, 0.5f, 5f);
 
         core.getServer().getPluginManager().registerEvents(
                 new GeneratorListener(this, core.getProfileHandler()
@@ -37,10 +45,12 @@ public class GeneratorHandler {
         generators.put(uuid, generator);
         generatorLocations.add(location);
 
-        //add hologram
+        HologramBuilder.hologram(new HologramKey(hologramPool, generator.getUuid().toString()), location.clone().add(0.5, -1 , 0.5), () -> {
+            HologramBuilder.textline(Style.translate(generator.getType().display));
+            HologramBuilder.textline(Style.translate("&l&6⤷ &7Amount: &f{} &6&l⤶"), generator.getAmount());
+        });
 
         GeneratorScheduler.createTask(generator);
-
         return generator;
     }
 
