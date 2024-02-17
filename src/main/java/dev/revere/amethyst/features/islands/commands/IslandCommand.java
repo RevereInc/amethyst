@@ -178,10 +178,16 @@ public class IslandCommand extends BaseCommand {
         invitedMap.remove(invitedUUID);
 
         for (UUID uuid : island.get().getMembers()) {
-            sender.sendMessage(Locale.ISLAND_OTHER_JOINED.getColoredString().replaceAll("<player>", Bukkit.getPlayer(invitedUUID).getName()));
+            Player member = Bukkit.getPlayer(uuid);
+
+            if(member == null)
+                return;
+
+            member.sendMessage(Locale.ISLAND_OTHER_JOINED.getColoredString().replaceAll("<player>", Bukkit.getPlayer(invitedUUID).getName()));
         }
 
         sender.sendMessage(Locale.ISLAND_JOINED.getColoredString().replaceAll("<player>", Bukkit.getPlayer(senderUUID).getName()));
+        move(sender, island.get());
     }
 
     private void move(Player player, Island island) {

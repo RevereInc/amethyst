@@ -48,6 +48,7 @@ public class MongoProfileStorage {
         profile.setAutoSell(document.getBoolean("autoSell"));
 
         List<Generator> generators = new ArrayList<>();
+
         List<UUID> uuidList = document.get("generators", ArrayList.class);
         for (UUID id : uuidList) {
             Optional<Generator> generator = generatorHandler.getGenerator(id);
@@ -62,6 +63,10 @@ public class MongoProfileStorage {
         UUID islandID = document.get("island", UUID.class);
         if (islandID != null)
             islandHandler.getIsland(islandID).ifPresent(island -> profile.setIsland(islandID));
+
+        for(UUID member : islandHandler.getIsland(islandID).get().getMembers()) {
+            load(member);
+        }
 
         return Optional.of(profile);
     }

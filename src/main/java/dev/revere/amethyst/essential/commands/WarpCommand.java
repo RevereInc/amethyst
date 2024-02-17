@@ -22,22 +22,6 @@ public class WarpCommand extends BaseCommand {
         this.profileHandler = core.getProfileHandler();
     }
 
-    @CommandAlias("pvp")
-    public void pvp(Player sender) {
-        ConfigurationSection section = Main.getInstance().getSettingsYML().getConfig().getConfigurationSection("LOCATIONS.WARZONE");
-
-        Location location = new Location(
-                Bukkit.getServer().getWorld("world"),
-                section.getDouble("X"),
-                section.getDouble("Y"),
-                section.getDouble("Z"),
-                Integer.valueOf(section.getInt("PITCH")).floatValue(),
-                Integer.valueOf(section.getInt("YAW")).floatValue());
-
-        sender.teleportAsync(location);
-        sender.sendMessage(Locale.WARZONE_TELEPORT.getColoredString());
-    }
-
     @CommandAlias("farm")
     public void farm(Player sender) {
         Profile profile = profileHandler.getProfile(sender.getUniqueId());

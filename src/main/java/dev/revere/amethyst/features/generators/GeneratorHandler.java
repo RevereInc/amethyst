@@ -33,6 +33,8 @@ public class GeneratorHandler {
         core.getStorage().saveGenerator(generator);
         generators.put(uuid, generator);
 
+        //add hologram
+
         GeneratorScheduler.createTask(generator);
 
         return generator;
@@ -44,6 +46,8 @@ public class GeneratorHandler {
 
         GeneratorScheduler.removeTask(generator);
         generators.remove(generator.getUuid());
+
+        //remove hologram
     }
 
 
