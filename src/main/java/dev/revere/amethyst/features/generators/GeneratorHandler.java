@@ -54,11 +54,18 @@ public class GeneratorHandler {
         return generator;
     }
 
+    public void updateHologram(Generator generator) {
+        hologramPool.get(generator.getUuid().toString()).getLines().get(0).update(Bukkit.getOnlinePlayers());
+        hologramPool.get(generator.getUuid().toString()).getLines().get(1).update(Bukkit.getOnlinePlayers());
+    }
+
     public final void remove(Generator generator, boolean remove) {
         if (remove)
             core.getStorage().removeGenerator(generator);
 
         GeneratorScheduler.removeTask(generator);
+        hologramPool.remove(new HologramKey(hologramPool, generator.getUuid().toString()));
+
         generators.remove(generator.getUuid());
 
         //remove hologram

@@ -70,6 +70,8 @@ public class UpgradeMenu extends Menu {
                         if (item.isSimilar(generator.getType().itemStack())) {
                             item.setAmount(item.getAmount() - 1);
                             generator.setAmount(generator.getAmount() + 1);
+                            generatorHandler.updateHologram(generator);
+
                             this.updateMenu();
                             return;
                         }
@@ -125,9 +127,12 @@ public class UpgradeMenu extends Menu {
 
                         profile.getGenerators().remove(generator);
                         generator.getLocation().getBlock().setType(Material.AIR);
+
                         event.getWhoClicked().closeInventory();
                     } else {
                         generator.setAmount(generator.getAmount() - 1);
+                        generatorHandler.updateHologram(generator);
+
                         updateMenu();
                     }
 
