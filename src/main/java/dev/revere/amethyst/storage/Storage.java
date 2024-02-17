@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface Storage {
+
     Optional<Profile> loadProfile(UUID uuid);
     Optional<Generator> loadGenerator(UUID uuid);
     Optional<Tool> loadTool(UUID uuid);

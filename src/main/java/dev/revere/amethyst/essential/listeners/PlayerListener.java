@@ -43,7 +43,7 @@ public class PlayerListener implements Listener {
         event.setJoinMessage(null);
 
         if (toolHandler.getTool(player.getUniqueId()).isEmpty()) {
-            System.out.println("test");
+
             final Tool tool = toolHandler.createTool(
                     player.getUniqueId(),
                     ToolRarity.BASIC

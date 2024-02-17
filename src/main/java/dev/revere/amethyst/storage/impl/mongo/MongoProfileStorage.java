@@ -64,10 +64,6 @@ public class MongoProfileStorage {
         if (islandID != null)
             islandHandler.getIsland(islandID).ifPresent(island -> profile.setIsland(islandID));
 
-        for(UUID member : islandHandler.getIsland(islandID).get().getMembers()) {
-            load(member);
-        }
-
         return Optional.of(profile);
     }
 

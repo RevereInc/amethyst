@@ -22,12 +22,6 @@ LOCATIONS:
     Z: 0.5
     PITCH: 90.0
     YAW: 0.0
-  WARZONE:
-    X: 10000.5
-    Y: 102.5
-    Z: 10000.5
-    PITCH: 0.0
-    YAW: 0.0
   WHEAT:
     X: -10000.5
     Y: 102.5
@@ -46,9 +40,20 @@ LOCATIONS:
     Z: -10000.5
     PITCH: 90.0
     YAW: 0.0
-  DUNGEON:
-    X: 0.5
-    Y: 90
-    Z: 0.5
-    PITCH: 0.0
-    YAW: 0.0
+
+SKILLS:
+  FARMING:
+    CROP-XP-GAIN:
+      - WHEAT: 2
+      - CARROTS: 6
+      - POTATOES: 8
+  MINING:
+    BLOCK-XP-GAIN:
+      - COAL_ORE: 25
+      - REDSTONE_ORE: 50
+      - DIAMOND_ORE: 75
+    LEVEL-RESTRICTION:
+      - COAL_ORE: 15
+      - REDSTONE_ORE: 30
+      - DIAMOND_ORE: 50
+    

@@ -1,5 +1,6 @@
 package dev.revere.amethyst;
 
+import com.mongodb.Mongo;
 import dev.revere.amethyst.essential.commands.AutoSellCommand;
 import dev.revere.amethyst.essential.commands.CraftCommand;
 import dev.revere.amethyst.essential.commands.FlyCommand;
@@ -26,6 +27,7 @@ import dev.revere.amethyst.features.world.WorldHandler;
 import dev.revere.amethyst.hook.ShopGUIPlusHook;
 import dev.revere.amethyst.hook.provider.EconomyProvider;
 import dev.revere.amethyst.profile.Profile;
+import dev.revere.amethyst.storage.MongoHandler;
 import dev.revere.amethyst.storage.MongoStorage;
 import dev.revere.amethyst.storage.Storage;
 import dev.revere.amethyst.features.islands.IslandHandler;
@@ -56,6 +58,8 @@ public class Main extends JavaPlugin {
     @Getter
     private Storage storage;
 
+
+    private MongoHandler mongoHandler;
     private ProfileHandler profileHandler;
     private GeneratorHandler generatorHandler;
     private ToolHandler toolHandler;
@@ -100,6 +104,7 @@ public class Main extends JavaPlugin {
      */
     @Override
     public void onEnable() {
+        this.mongoHandler = new MongoHandler(this, getConfigYML());
         loadHandlers();
 
         if (Bukkit.getPluginManager().getPlugin("ShopGuiPlus") != null) {
@@ -107,7 +112,7 @@ public class Main extends JavaPlugin {
         }
 
         if (configYML.getBoolean("STORAGE.MONGO-STORAGE")) {
-            this.storage = new MongoStorage(this);
+            this.storage = new MongoStorage(this, mongoHandler);
         }
 
         islandHandler.loadGrid(this);

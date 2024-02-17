@@ -10,9 +10,12 @@ import dev.revere.amethyst.profile.Profile;
 import dev.revere.amethyst.profile.ProfileHandler;
 import dev.revere.amethyst.utils.chat.Style;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -59,11 +62,9 @@ public class GeneratorListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         final Player player = event.getPlayer();
+        List<Location> generatorLocations = generatorHandler.getGeneratorLocations();
 
-        for (Generator generator : generatorHandler.getGenerators().values()) {
-            if (!generator.location.equals(event.getBlock().getLocation()))
-                continue;
-
+        if(generatorLocations.contains(event.getBlock().getLocation())) {
             player.sendMessage(Style.translate("&4&l[!] &cYou must open the menu to remove generators. " + "&7(Shift + Right Click)"));
             event.setCancelled(true);
         }
@@ -89,7 +90,6 @@ public class GeneratorListener implements Listener {
             return;
 
         for (Generator gen : profile.getGenerators()) {
-            System.out.println(gen.getUuid());
             generatorHandler.remove(gen, false);
         }
     }

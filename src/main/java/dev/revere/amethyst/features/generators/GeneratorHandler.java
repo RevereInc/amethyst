@@ -1,15 +1,15 @@
 package dev.revere.amethyst.features.generators;
 
+import com.mongodb.client.MongoCursor;
 import dev.revere.amethyst.Main;
 import dev.revere.amethyst.features.generators.listener.GeneratorListener;
 import dev.revere.amethyst.features.generators.listener.GeneratorScheduler;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import lombok.Getter;
+import org.bson.Document;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 @Getter
@@ -17,9 +17,12 @@ public class GeneratorHandler {
 
     private final Main core;
     private final Map<UUID, Generator> generators = new HashMap<>();
+    private final List<Location> generatorLocations;
 
     public GeneratorHandler(Main core) {
         this.core = core;
+        this.generatorLocations = loadGeneratorLocations();
+
         core.getServer().getPluginManager().registerEvents(
                 new GeneratorListener(this, core.getProfileHandler()
                 ),
@@ -32,6 +35,7 @@ public class GeneratorHandler {
 
         core.getStorage().saveGenerator(generator);
         generators.put(uuid, generator);
+        generatorLocations.add(location);
 
         //add hologram
 
@@ -59,6 +63,29 @@ public class GeneratorHandler {
         generator.ifPresent(value -> generators.put(uuid, value));
 
         return generator;
+    }
+
+    public List<Location> loadGeneratorLocations() {
+        List<Location> toReturn = new ArrayList<>();
+        MongoCursor<Document> cursor = Main.getInstance().getMongoHandler().getGenerators().find().iterator();
+
+        try {
+            while(cursor.hasNext()) {
+                Document document = cursor.next();
+
+                Location location = new Location(
+                        Bukkit.getWorld(document.getString("world")),
+                        document.getDouble("x"),
+                        document.getDouble("y"),
+                        document.getDouble("z"));
+
+                toReturn.add(location);
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return toReturn;
     }
 
 }

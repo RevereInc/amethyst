@@ -121,6 +121,8 @@ public class UpgradeMenu extends Menu {
 
                     if (generator.amount <= 1) {
                         generatorHandler.remove(generator, true);
+                        generatorHandler.getGeneratorLocations().remove(generator.getLocation());
+
                         profile.getGenerators().remove(generator);
                         generator.getLocation().getBlock().setType(Material.AIR);
                         event.getWhoClicked().closeInventory();

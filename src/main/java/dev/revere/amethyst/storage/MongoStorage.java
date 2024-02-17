@@ -8,6 +8,7 @@ import dev.revere.amethyst.features.tool.enchants.Enchant;
 import dev.revere.amethyst.profile.Profile;
 import dev.revere.amethyst.storage.impl.mongo.*;
 import dev.revere.amethyst.utils.location.Grid;
+import lombok.Getter;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,9 +23,8 @@ public class MongoStorage implements Storage {
     private final MongoGridStorage grid;
     private final MongoEnchantStorage enchants;
 
-    public MongoStorage(Main core) {
-        MongoHandler handler = new MongoHandler(core, core.getConfigYML());
 
+    public MongoStorage(Main core, MongoHandler handler) {
         this.profiles = new MongoProfileStorage(core, handler);
         this.generators = new MongoGeneratorStorage(core, handler);
         this.islands = new MongoIslandStorage(handler);

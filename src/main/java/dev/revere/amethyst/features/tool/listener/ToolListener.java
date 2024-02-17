@@ -41,7 +41,7 @@ public class ToolListener implements Listener {
 
     List<Material> minable = Arrays.asList(Material.COAL_ORE, Material.REDSTONE_ORE, Material.DIAMOND_ORE);
 
-    List<Material> farmable = Arrays.asList(Material.WHEAT, Material.CARROTS, Material.POTATOES, Material.NETHER_WART);
+    List<Material> farmable = Arrays.asList(Material.WHEAT, Material.CARROTS, Material.POTATOES);
 
     @EventHandler
     public void onMine(BlockBreakEvent event) {
@@ -53,6 +53,8 @@ public class ToolListener implements Listener {
 
             int levelRestriction = 0;
             double xp = 0;
+
+
 
             switch (event.getBlock().getType()) {
                 case COAL_ORE -> { xp = 25; levelRestriction = 15; }
@@ -99,7 +101,6 @@ public class ToolListener implements Listener {
             case WHEAT -> { xp = 2; giveMaterial = Material.WHEAT; }
             case CARROTS -> { xp = 6; giveMaterial = Material.CARROT; }
             case POTATOES -> { xp = 8; giveMaterial = Material.POTATO; }
-            case NETHER_WART -> { xp = 16; giveMaterial = Material.NETHER_WART; }
         }
 
         if (farmable.contains(material)) {

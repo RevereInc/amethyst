@@ -45,12 +45,6 @@ public class Grid {
         this.fillingRegion.region.z2
     );
 
-    System.out.println("grid: filled "
-        + this.filledRegion.x1 + " "
-        + this.filledRegion.z1 + " "
-        + this.filledRegion.x2 + " "
-        + this.filledRegion.z2);
-
     /* find a new filling region */
     Region region;
     Direction direction;
@@ -65,11 +59,6 @@ public class Grid {
             this.filledRegion.z2
         );
 
-        System.out.println("grid: next (across) "
-            + region.x1 + " "
-            + region.z1 + " "
-            + region.x2 + " "
-            + region.z2);
         break;
 
       case Down:
@@ -82,11 +71,6 @@ public class Grid {
             this.filledRegion.z2 + size + spacing
         );
 
-        System.out.println("grid: next (down) "
-            + region.x1 + " "
-            + region.z1 + " "
-            + region.x2 + " "
-            + region.z2);
         break;
 
       default:
@@ -131,12 +115,10 @@ public class Grid {
       else
         this.region.z1 += size + spacing;
 
-      System.out.println("grid: fill: next " + this.region.x1 + " " + this.region.z1);
     }
 
     public Optional<Region> nextRegion() {
       if(this.currentPos() + size + spacing > this.endPos()) {
-        System.out.println("grid: fill: region was full");
         return Optional.empty();
       }
 
@@ -146,12 +128,6 @@ public class Grid {
           this.region.x1 + size,
           this.region.z1 + size
       );
-
-      System.out.println("grid: fill: new region "
-      + this.region.x1 + " "
-      + this.region.z1 + " "
-      + this.region.x2 + " "
-      + this.region.z2);
 
       this.nextPos();
       return Optional.of(region);

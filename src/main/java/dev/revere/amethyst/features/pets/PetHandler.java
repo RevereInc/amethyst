@@ -115,13 +115,11 @@ public class PetHandler implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
-        System.out.println("player quit event infact gets called on server shutdown?");
 
         Profile profile = profileHandler.getProfile(uuid);
 
         Optional<Pet> pet = getPet(uuid);
         if (pet.isEmpty()) {
-            System.out.println("did not have an enabled pet;");
             return;
         }
 

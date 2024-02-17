@@ -1,5 +1,6 @@
 package dev.revere.amethyst.storage.impl.mongo;
 
+import com.mongodb.client.MongoCursor;
 import dev.revere.amethyst.Main;
 import dev.revere.amethyst.features.generators.Generator;
 import dev.revere.amethyst.features.generators.GeneratorType;
@@ -7,6 +8,8 @@ import dev.revere.amethyst.storage.MongoHandler;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.ReplaceOptions;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -57,6 +60,6 @@ public class MongoGeneratorStorage {
     }
 
     public void remove(Generator gen) {
-        mongoHandler.getGenerators().deleteMany(Filters.eq("_id", gen.getUuid()));
+        mongoHandler.getGenerators().deleteMany(Filters.eq("_id", gen.getUuid().toString()));
     }
 }
