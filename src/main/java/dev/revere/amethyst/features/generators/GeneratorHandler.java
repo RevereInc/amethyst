@@ -55,12 +55,16 @@ public class GeneratorHandler {
     }
 
 
-    public final Optional<Generator> getGenerator(UUID uuid) {
+    public final Optional<Generator> getGenerator(UUID uuid, boolean loadHologram) {
         if (generators.containsKey(uuid))
             return Optional.of(generators.get(uuid));
 
         Optional<Generator> generator = core.getStorage().loadGenerator(uuid);
         generator.ifPresent(value -> generators.put(uuid, value));
+
+        if(loadHologram) {
+            // create hologram
+        }
 
         return generator;
     }

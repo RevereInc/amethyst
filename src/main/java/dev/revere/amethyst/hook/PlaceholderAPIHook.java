@@ -1,7 +1,6 @@
 package dev.revere.amethyst.hook;
 
 import dev.revere.amethyst.Main;
-import dev.revere.amethyst.features.dungeons.DungeonHandler;
 import dev.revere.amethyst.profile.Profile;
 import dev.revere.amethyst.utils.chat.Style;
 import dev.revere.amethyst.utils.formatter.MathUtils;
@@ -70,10 +69,6 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
                     return "";
                 else
                     return Style.translate("&7(" + profile.getPrestige() + ")");
-            case "jungle_remaining":
-                return core.getDungeonHandler().getRemaining(profile.getUuid());
-            case "jungle_kills":
-                return String.valueOf(core.getDungeonHandler().killMap.getOrDefault(profile.getUuid(), 0));
         }
 
         return null;

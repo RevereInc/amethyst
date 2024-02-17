@@ -1,6 +1,5 @@
 package dev.revere.amethyst;
 
-import com.mongodb.Mongo;
 import dev.revere.amethyst.essential.commands.AutoSellCommand;
 import dev.revere.amethyst.essential.commands.CraftCommand;
 import dev.revere.amethyst.essential.commands.FlyCommand;
@@ -8,8 +7,6 @@ import dev.revere.amethyst.essential.commands.SpawnCommand;
 import dev.revere.amethyst.essential.commands.WarpCommand;
 import dev.revere.amethyst.essential.commands.economy.*;
 import dev.revere.amethyst.features.actionbar.ActionBarHandler;
-import dev.revere.amethyst.features.dungeons.DungeonHandler;
-import dev.revere.amethyst.features.dungeons.commands.DungeonCommand;
 import dev.revere.amethyst.features.generators.commands.GeneratorCommand;
 import dev.revere.amethyst.features.islands.commands.IslandCommand;
 import dev.revere.amethyst.essential.listeners.PlayerListener;
@@ -67,7 +64,6 @@ public class Main extends JavaPlugin {
     private PetHandler petHandler;
     private ActionBarHandler actionBarHandler;
     private LevelHandler levelHandler;
-    private DungeonHandler dungeonHandler;
     private WorldHandler worldHandler;
 
     private EconomyProvider economyProvider;
@@ -135,7 +131,6 @@ public class Main extends JavaPlugin {
         this.petHandler = new PetHandler(this);
         this.actionBarHandler = new ActionBarHandler(this);
         this.levelHandler = new LevelHandler(this);
-        this.dungeonHandler = new DungeonHandler(this);
         this.scoreboardHandler = new ScoreboardHandler();
         this.worldHandler = new WorldHandler(this);
 
@@ -167,7 +162,6 @@ public class Main extends JavaPlugin {
                 new LevelCommand(),
                 new PetCommand(),
                 new WarpCommand(this),
-                new DungeonCommand(),
                 new PrestigeCommand(),
                 new PayCommand(this),
                 new FlyCommand(),

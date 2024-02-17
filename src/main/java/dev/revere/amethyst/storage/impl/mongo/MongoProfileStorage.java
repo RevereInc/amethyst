@@ -51,7 +51,7 @@ public class MongoProfileStorage {
 
         List<UUID> uuidList = document.get("generators", ArrayList.class);
         for (UUID id : uuidList) {
-            Optional<Generator> generator = generatorHandler.getGenerator(id);
+            Optional<Generator> generator = generatorHandler.getGenerator(id, true);
             if (generator.isEmpty())
                 continue;
 
